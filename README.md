@@ -1,37 +1,52 @@
-## Welcome to GitHub Pages
+## Lab 4
 
-You can use the [editor on GitHub](https://github.com/liv-edi/lab4/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+In this lab we created a Fastify Node.js web server, initialized a folder as a Node.js project folder using npm, added Fastify using npm, tested our code using VSCode, added a git repo excluding node_modules, made commits using git, fixed MIME error, texted and commited it, and added a route with query parameters, tested and commited.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Technologies used for this lab:
+- VSCode
+- Node.js
+- git
 
-### Markdown
+The purpose of this lab was to practice using git, Node.js, learn how to exclude files from git, make commits, create and test routes, amd add Fastify/ Node.js to projects using npm.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+From doing this lab I learned about routes. I founf trying to code routes difficult at first but then when I finally got the hang of the concept it became much easier.
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/liv-edi/lab4/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+// Require the Fastify framework and instantiate it
+const fastify = require("fastify")();
+// Handle GET verb for / route using Fastify
+// Note use of "chain" dot notation syntax
+fastify.get("/", (request, reply) => {
+  reply
+    .code(200)
+    .header('Content-Type', 'text/html', 'charset=utf-8')
+    .send("<h1>Hello from Lab 4!</h1>");
+});
+fastify.get("/name", (request, reply) => {
+  const { first = "", last = ""} = request.query;
+  let name = "";
+  first=="" || last==""? name = "Guest": name = `${first} ${last}`;
+  reply
+    .code(200)
+    .header('Content-Type', 'text/html')
+    .send(`<h1>Hello, ${name}`);
+})
+// Start server and listen to requests using Fastify
+const listenIP = "localhost";
+const listenPort = 8080;
+fastify.listen(listenPort, listenIP, (err, address) => {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+  console.log(`Server listening on ${address}`);
+});
+/*fastify.get("/name", (request, reply) => {
+  const {Olivia, Edwards} = request.body;
+  let response = "Name";
+  reply
+    .code(200)
+    .header('Content-Type', 'text/plain')
+    .send(response);
+})*/
+```
