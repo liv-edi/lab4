@@ -1,5 +1,7 @@
 ## Lab 4
 
+[Home](https://liv-edi.github.io/cit281/)
+
 In this lab we created a Fastify Node.js web server, initialized a folder as a Node.js project folder using npm, added Fastify using npm, tested our code using VSCode, added a git repo excluding node_modules, made commits using git, fixed MIME error, texted and commited it, and added a route with query parameters, tested and commited.
 
 Technologies used for this lab:
